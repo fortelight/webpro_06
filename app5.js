@@ -76,6 +76,6 @@ app.get("/janken", (req, res) => {
     total: total
   }
   res.render( 'janken', display );
-});
+;
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
