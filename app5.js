@@ -29,9 +29,11 @@ app.get("/luck", (req, res) => {
 
 app.get("/janken", (req, res) => {
   let hand = req.query.hand;
-  let win = Number( req.query.win );
-  let total = Number( req.query.total );
+  let win = Number( req.query.win ) || 0;
+  let total = Number( req.query.total ) || 0;
+
   console.log( {hand, win, total});
+
   const num = Math.floor( Math.random() * 3 + 1 );
   let cpu = '';
   if( num==1 ) cpu = 'グー';
@@ -43,9 +45,9 @@ app.get("/janken", (req, res) => {
   if (hand == cpu) {
     judgement = '引き分け';
   } else if (
-    (hand == 'グー' && cpu == 'チョキ')
-    (hand == 'チョキ' && cpu == 'パー')
-    (hand == 'パー' && cpu == 'グー')
+    (hand == 'グー' && cpu == 'チョキ') ||
+    (hand == 'チョキ' && cpu == 'パー') ||
+    (hand == 'パー' && cpu == 'グー') 
   ) {
     judgement = '勝ち';
     win += 1;
@@ -65,17 +67,65 @@ app.get("/janken", (req, res) => {
 
   res.render('janken', display);
 });
-  let judgement = '勝ち';
-  win += 1;
+
+app.get("/saikoro", (req, res) => {
+  const value = req.query.radio;
+  const num = Math.floor( Math.random() * 11 + 1 );
+  let dice = '';
+  if( num<=5 ) dice = value;
+  else if( num==6 ) dice = '1';
+  else if( num==7 ) dice = '2';
+  else if( num==8 ) dice = '3';
+  else if( num==9 ) dice = '4';
+  else if( num==10 ) dice = '5';
+  else if( num==11 ) dice = '6';
+
+  if (dice == value) judge ='成功'
+  else judge = '失敗'
+
+  console.log( {value, num, dice, judge});
+
+    const display = {
+      value : value, 
+      dice : dice,
+      judge : judge
+    };
+  res.render( 'saikoro', display );
+});
+
+
+app.get("/facegame", (req, res) => {
+  let finger = req.query.radio;
+  let win = Number( req.query.win ) || 0;
+  let total = Number( req.query.total ) || 0;
+
+  console.log( {finger, win, total});
+
+  const num = Math.floor( Math.random() * 4 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = '上';
+  else if( num==2 ) cpu = '下';
+  else if ( num==3) cpu = '右';
+  else cpu = '左';
+
+  let judgement = '';
+ if (
+    (finger == cpu) 
+  ) {
+    judgement = '勝ち';
+    win += 1;
+  } else {
+    judgement = '負け';
+  }
   total += 1;
+
   const display = {
-    your: hand,
+    your: finger,
     cpu: cpu,
     judgement: judgement,
-    win: win,
-    total: total
-  }
-  res.render( 'janken', display );
+   
+  };
 
-
+  res.render('facegame', display);
+});
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
