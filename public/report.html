@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/report.css">
+  <title>Task Manager</title>
+</head>
+<body>
+  <header>
+    <h1>Task Manager</h1>
+  </header>
+  <main>
+    <section id="tasks-section">
+      <h2>Tasks</h2>
+      <form id="task-form">
+        <input type="text" id="task-title" placeholder="Task Title" required>
+        <select id="task-priority">
+          <option value="高">High</option>
+          <option value="中" selected>Medium</option>
+          <option value="低">Low</option>
+        </select>
+        <button type="submit">Add Task</button>
+      </form>
+      <ul id="task-list"></ul>
+    </section>
+  </main>
+  <script src="/public/report.js"></script>
+</body>
+</html>
+
+
+

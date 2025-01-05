@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>あっちむいてほい</title>
+</head>
+<body>
+    <p>あなたは<%= your %>を指しました．</p>
+    <p>コンピュータは<%= cpu %>に向きました．</p>
+    <p>判定：<%= judgement %></p>
+    <hr>
+    <form action="/facegame">
+        <label for="finger">次はどちら？</label><br>
+        <input type="radio" name="radio" id="radio1" value="上">
+        <label for="radio1">上</label><br>
+        <input type="radio" name="radio" id="radio2" value="下">
+        <label for="radio1">下</label><br>
+        <input type="radio" name="radio" id="radio3" value="右">
+        <label for="radio1">右</label><br>
+        <input type="radio" name="radio" id="radio4" value="左">
+        <label for="radio1">左</label><br>
+        <input type="submit" values="あっちむいてほい！">
+    </form>   
+</body>
+</html>
